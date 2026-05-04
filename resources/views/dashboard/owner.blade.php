@@ -1,21 +1,58 @@
 @extends('layouts.dashboard')
 
 @section('title', 'Dashboard Owner')
-@section('page-title', 'Dashboard Owner')
-@section('sidebar-menu')
-    <li class="{{ request()->routeIs('dashboard.owner') ? 'active' : '' }}"><a href="{{ route('dashboard.owner') }}"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
-    <li><a href="#"><i class="fas fa-exchange-alt"></i> <span>Transaksi</span></a></li>
-    <li><a href="#"><i class="fas fa-chart-line"></i> <span>Laporan Pemasukan</span></a></li>
-    <li><a href="#"><i class="fas fa-chart-line"></i> <span>Laporan Pengeluaran</span></a></li>
-    <li><a href="#"><i class="fas fa-file-invoice-dollar"></i> <span>Piutang</span></a></li>
-    <li><a href="#"><i class="fas fa-industry"></i> <span>Monitoring Produksi</span></a></li>
+@section('page-title', 'Selamat Datang, Owner!')
+@section('page-subtitle')
+Dashboard Utama Anita Konveksi — {{ \Carbon\Carbon::now()->isoFormat('D MMMM YYYY') }}
 @endsection
+
+@section('sidebar-menu')
+    @include('owner.sidebar')
+@endsection
+
 @section('dashboard-content')
-    <h3>Selamat datang, Owner {{ Auth::user()->name }}</h3>
-    <p>Halaman ini menampilkan ringkasan data toko.</p>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; margin-top:1rem;">
-        <div style="background:#f8f9fa; padding:1rem; border-radius:8px;">📊 Total Transaksi: Rp 124.500.000</div>
-        <div style="background:#f8f9fa; padding:1rem; border-radius:8px;">👥 Piutang: Rp 12.000.000</div>
-        <div style="background:#f8f9fa; padding:1rem; border-radius:8px;">🏭 Produksi: 5 pesanan aktif</div>
+
+<div class="stats-grid">
+    <div class="stat-card dark">
+        <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+        <div class="stat-value">Rp 120 Jt</div>
+        <div class="stat-label">Total Omset Bulan Ini</div>
     </div>
+    <div class="stat-card green">
+        <div class="stat-icon"><i class="fas fa-hand-holding-usd"></i></div>
+        <div class="stat-value">Rp 85 Jt</div>
+        <div class="stat-label">Total Pemasukan</div>
+    </div>
+    <div class="stat-card orange">
+        <div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div>
+        <div class="stat-value">Rp 35 Jt</div>
+        <div class="stat-label">Total Pengeluaran</div>
+    </div>
+    <div class="stat-card blue">
+        <div class="stat-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+        <div class="stat-value">Rp 15 Jt</div>
+        <div class="stat-label">Total Piutang Belum Lunas</div>
+    </div>
+</div>
+
+<div class="cards-grid">
+    <div class="content-card" style="min-height: 400px;">
+        <div class="card-header" style="background-color: #E9ECEF;">
+            <h3>Grafik Pemasukan & Pengeluaran</h3>
+        </div>
+        <div class="card-body" style="display:flex; align-items:center; justify-content:center;">
+            <p style="color: var(--text-muted);">[ Area Grafik / Chart ]</p>
+        </div>
+    </div>
+
+    <div class="content-card" style="min-height: 400px;">
+        <div class="card-header" style="background-color: #E9ECEF;">
+            <h3>Ringkasan Transaksi Terbaru</h3>
+        </div>
+        <div class="card-body" style="display:flex; align-items:center; justify-content:center;">
+            <p style="color: var(--text-muted);">[ List Transaksi Terbaru ]</p>
+        </div>
+    </div>
+</div>
+
 @endsection
