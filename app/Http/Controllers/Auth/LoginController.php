@@ -26,9 +26,9 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             return match(Auth::user()->role) {
-                'owner' => redirect()->route('dashboard.owner'),
+                'owner' => redirect()->route('owner.dashboard'),
                 'admin' => redirect()->route('dashboard.admin'),
-                'kasir' => redirect()->route('dashboard.kasir'),
+                'kasir' => redirect()->route('kasir.dashboard'),
                 default => redirect('/'),
             };
         }
